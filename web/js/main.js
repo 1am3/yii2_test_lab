@@ -20,7 +20,7 @@ $("document").ready(function(){
     });
     $('.send_sms').on("click",function(){
         $.ajax({
-            'url' : '/index.php?r=message/send',
+            'url' : 'index.php?r=message/send',
             'type' : 'POST',
             'data' : 'type=sms&message_id='+$("#send_message_id").val(),
             success: function(msg) {
@@ -32,7 +32,7 @@ $("document").ready(function(){
     $('#send_modal').on('hidden.bs.modal', function () {
         $.pjax({
             type       : 'POST',
-            url        : '/index.php?r=message/index',
+            url        : 'index.php?r=message/index',
             container  : '#messages',
             data       : {},
             push       : true,
@@ -44,7 +44,7 @@ $("document").ready(function(){
     });
     $('.send_email').on("click",function(){
         $.ajax({
-            'url' : '/index.php?r=message/send',
+            'url' : 'index.php?r=message/send',
             'type' : 'POST',
             'data' : 'type=email&message_id='+$("#send_message_id").val(),
             success: function(msg) {

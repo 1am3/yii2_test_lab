@@ -22,7 +22,9 @@ class MessageController extends Controller
      * @return string
      */
     public function actionIndex() {
-
+        if(Yii::$app->user->isGuest) {
+           $this->redirect('/index.php?r=site/login');
+        }
         if(\Yii::$app->request->post()) {
             $model = new Message();
             if($model->load(Yii::$app->request->post())) {
@@ -37,14 +39,11 @@ class MessageController extends Controller
                 }
             }
         }
-        //$this->debug(\Yii::$app->request->post());
         //Список сообщений
         $messages = Message::find()->where(['user_id' => Yii::$app->user->id])->orderBy('id',SORT_DESC);
 
         //Форма создания сообщения
         $formModel = new Message();
-
-
 
         //Магия для gridView
         $dataProvider = new ActiveDataProvider([
